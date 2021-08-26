@@ -7,13 +7,13 @@ const {
 } = require(`../../../.cache/page-ssr`);
 
 const { copy, existsSync } = require(`fs-extra`);
-
+const { link } = require(`linkfs`)
 const realFs = require(`fs`)
 
-global._fsWrapper = {...realFs, writeFile: async (file, data, encoding, callback) => {
-console.log(`writeFile: ${file}`);
-return realFs.writeFile(file, data, encoding, callback);
-}};
+const cacheDir = join(process.env.LAMBDA_TASK_ROOT, `.cache`)
+const tmpCache = join("/tmp", ".cache")
+
+global._fsWrapper = link(realFs, [cacheDir, tmpCache])
 
 // function reverseFixedPagePath(pageDataRequestPath) {
 //   return pageDataRequestPath === `index` ? `/` : pageDataRequestPath
@@ -21,14 +21,16 @@ return realFs.writeFile(file, data, encoding, callback);
 
 const render = async (pathName) => {
   console.time(`start engine`);
-  const dbSource = join(process.env.LAMBDA_TASK_ROOT, `.cache`, `data`, `datastore`)
-  const dbPath = join("/tmp", "datastore")  
+  const cacheSource = join(process.env.LAMBDA_TASK_ROOT, `.cache`)
 
-  if(!existsSync(dbPath)) {
-    await copy(dbSource, dbPath)
+  if(!existsSync(tmpCache)) {
+    await copy(cacheDir, tmpCache)
   }
 
-  console.log({dbPath})
+
+  const dbPath = join(cacheDir, "data", "datastore")  
+
+
   const graphqlEngine = new GraphQLEngine({
     dbPath,
   });

@@ -9,6 +9,7 @@
     "gatsby": "3.11.0-alpha-qe-sm.69",
     "gatsby-source-filesystem": "^3.9.0",
     "gatsby-transformer-remark": "^4.6.0",
+    "linkfs": "^2.1.0",
     "lmdb-store": "1.5.5",
     "node-fetch": "^2.6.1",
     "react": "^17.0.2",
