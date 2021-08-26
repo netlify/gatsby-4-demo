@@ -6,6 +6,7 @@ const {
   renderHTML,
 } = require(`../../../.cache/page-ssr`);
 
+const { copy, existsSync } = require(`fs-extra`);
 
 const realFs = require(`fs`)
 
@@ -20,7 +21,13 @@ return realFs.writeFile(file, data, encoding, callback);
 
 const render = async (pathName) => {
   console.time(`start engine`);
-  const dbPath = join(process.env.LAMBDA_TASK_ROOT, `.cache`, `data`, `datastore`)
+  const dbSource = join(process.env.LAMBDA_TASK_ROOT, `.cache`, `data`, `datastore`)
+  const dbPath = join("/tmp", "datastore")  
+
+  if(!existsSync(dbPath)) {
+    await copy(dbSource, dbPath)
+  }
+
   console.log({dbPath})
   const graphqlEngine = new GraphQLEngine({
     dbPath,
