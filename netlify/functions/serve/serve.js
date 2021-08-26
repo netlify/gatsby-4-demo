@@ -11,24 +11,24 @@ const { link } = require(`linkfs`)
 const realFs = require(`fs`)
 
 const cacheDir = join(process.env.LAMBDA_TASK_ROOT, `.cache`)
-const tmpCache = join("/tmp", ".cache")
-
-global._fsWrapper = link(realFs, [cacheDir, tmpCache])
+const tmpCache = join("/tmp", "gatsby",".cache")
+const rewrites = [[cacheDir, tmpCache], [join(process.env.LAMBDA_TASK_ROOT, "public"), join("/tmp", "gatsby", "public")]]
+global._fsWrapper = link(realFs, rewrites)
 
 // function reverseFixedPagePath(pageDataRequestPath) {
 //   return pageDataRequestPath === `index` ? `/` : pageDataRequestPath
 // }
 
 const render = async (pathName) => {
+  console.log(rewrites)
   console.time(`start engine`);
-  const cacheSource = join(process.env.LAMBDA_TASK_ROOT, `.cache`)
 
   if(!existsSync(tmpCache)) {
     await copy(cacheDir, tmpCache)
   }
 
 
-  const dbPath = join(cacheDir, "data", "datastore")  
+  const dbPath = join(tmpCache, "data", "datastore")  
 
 
   const graphqlEngine = new GraphQLEngine({
