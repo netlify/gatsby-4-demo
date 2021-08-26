@@ -1,0 +1,17 @@
+[build]
+command = "GATSBY_EXPERIMENTAL_GENERATE_ENGINES=1 yarn build"
+publish="public"
+
+[functions]
+directory = "netlify/functions"
+node_bundler = "zisi"
+external_node_modules = ["cbor-x", "babel-runtime", "lmdb-store"]
+included_files = [".cache/data/**", ".cache/query-engine/**"]
+
+[[redirects]]
+from = "/*"
+to = "/.netlify/functions/serve"
+status = 200
+
+[dev]
+framework = "#static"
