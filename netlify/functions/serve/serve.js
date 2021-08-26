@@ -1,13 +1,7 @@
 const { join } = require("path");
-const { GraphQLEngine } = require("../../../.cache/query-engine");
-const {
-  getData,
-  renderPageData,
-  renderHTML,
-} = require(`../../../.cache/page-ssr`);
 
 const { copy, existsSync } = require(`fs-extra`);
-const { fs } = require(`memfs`);
+// const { fs } = require(`memfs`);
 const { link } = require(`linkfs`);
 const realFs = require(`fs`);
 
@@ -20,13 +14,17 @@ const rewrites = [
     join("/tmp", "gatsby", "public"),
   ],
 ];
-global._fsWrapper = fs; // link(realFs, rewrites);
+global._fsWrapper = link(realFs, rewrites);
 
 // function reverseFixedPagePath(pageDataRequestPath) {
 //   return pageDataRequestPath === `index` ? `/` : pageDataRequestPath
 // }
 
 const render = async (pathName) => {
+  const { GraphQLEngine } = require("../../../.cache/query-engine");
+
+  const { getData, renderHTML } = require(`../../../.cache/page-ssr`);
+
   console.log(rewrites);
   console.time(`start engine`);
 
