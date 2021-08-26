@@ -20,8 +20,10 @@ return realFs.writeFile(file, data, encoding, callback);
 
 const render = async (pathName) => {
   console.time(`start engine`);
+  const dbPath = join(process.env.LAMBDA_RUNTIME_DIR, `.cache`, `data`, `datastore`)
+  console.log({dbPath})
   const graphqlEngine = new GraphQLEngine({
-    dbPath: join(`.`, `.cache`, `data`, `datastore`),
+    dbPath,
   });
   console.timeEnd(`start engine`);
   {
@@ -74,7 +76,7 @@ const render = async (pathName) => {
 };
 
 exports.handler = async function handler(event, context) {
-
+console.log(process.env)
   console.log(`event: ${JSON.stringify(event)}`);
   return {
     statusCode: 200,
