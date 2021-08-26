@@ -20,7 +20,7 @@ return realFs.writeFile(file, data, encoding, callback);
 
 const render = async (pathName) => {
   console.time(`start engine`);
-  const dbPath = join(process.env.LAMBDA_RUNTIME_DIR, `.cache`, `data`, `datastore`)
+  const dbPath = join(process.env.LAMBDA_TASK_ROOT, `.cache`, `data`, `datastore`)
   console.log({dbPath})
   const graphqlEngine = new GraphQLEngine({
     dbPath,
