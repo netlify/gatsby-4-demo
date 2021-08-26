@@ -6,11 +6,12 @@
   "dependencies": {
     "@sindresorhus/slugify": "^1.0.0",
     "fs-extra": "^10.0.0",
-    "gatsby": "3.11.0-alpha-qe-sm.69",
+    "gatsby": "3.11.0-alpha-qe-sm.70",
     "gatsby-source-filesystem": "^3.9.0",
     "gatsby-transformer-remark": "^4.6.0",
     "linkfs": "^2.1.0",
     "lmdb-store": "1.5.5",
+    "memfs": "^3.2.2",
     "node-fetch": "^2.6.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"

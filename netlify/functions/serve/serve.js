@@ -7,29 +7,34 @@ const {
 } = require(`../../../.cache/page-ssr`);
 
 const { copy, existsSync } = require(`fs-extra`);
-const { link } = require(`linkfs`)
-const realFs = require(`fs`)
+const { fs } = require(`memfs`);
+const { link } = require(`linkfs`);
+const realFs = require(`fs`);
 
-const cacheDir = join(process.env.LAMBDA_TASK_ROOT, `.cache`)
-const tmpCache = join("/tmp", "gatsby",".cache")
-const rewrites = [[cacheDir, tmpCache], [join(process.env.LAMBDA_TASK_ROOT, "public"), join("/tmp", "gatsby", "public")]]
-global._fsWrapper = link(realFs, rewrites)
+const cacheDir = join(process.env.LAMBDA_TASK_ROOT, `.cache`);
+const tmpCache = join("/tmp", "gatsby", ".cache");
+const rewrites = [
+  [cacheDir, tmpCache],
+  [
+    join(process.env.LAMBDA_TASK_ROOT, "public"),
+    join("/tmp", "gatsby", "public"),
+  ],
+];
+global._fsWrapper = fs; // link(realFs, rewrites);
 
 // function reverseFixedPagePath(pageDataRequestPath) {
 //   return pageDataRequestPath === `index` ? `/` : pageDataRequestPath
 // }
 
 const render = async (pathName) => {
-  console.log(rewrites)
+  console.log(rewrites);
   console.time(`start engine`);
 
-  if(!existsSync(tmpCache)) {
-    await copy(cacheDir, tmpCache)
+  if (!existsSync(tmpCache)) {
+    await copy(cacheDir, tmpCache);
   }
 
-
-  const dbPath = join(tmpCache, "data", "datastore")  
-
+  const dbPath = join(tmpCache, "data", "datastore");
 
   const graphqlEngine = new GraphQLEngine({
     dbPath,
@@ -85,7 +90,7 @@ const render = async (pathName) => {
 };
 
 exports.handler = async function handler(event, context) {
-console.log(process.env)
+  console.log(process.env);
   console.log(`event: ${JSON.stringify(event)}`);
   return {
     statusCode: 200,
