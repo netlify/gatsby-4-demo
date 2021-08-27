@@ -4,7 +4,7 @@ const os = require("os");
 const { copy, existsSync } = require(`fs-extra`);
 const { link } = require(`linkfs`);
 const fs = require(`fs`);
-const { spy } = require("spyfs");
+
 const cacheDir = join(process.cwd(), `.cache`);
 const tmpCache = join(os.tmpdir(), "gatsby", ".cache");
 const rewrites = [
@@ -18,9 +18,7 @@ for (const key in lfs) {
   }
 }
 
-global._fsWrapper = spy(lfs, async function (action) {
-  console.log("fs", await action);
-});
+global._fsWrapper = lfs;
 
 // function reverseFixedPagePath(pageDataRequestPath) {
 //   return pageDataRequestPath === `index` ? `/` : pageDataRequestPath

@@ -4778,11 +4778,6 @@ fs-extra@^8.1.0:
     jsonfile "^4.0.0"
     universalify "^0.1.0"
 
-fs-monkey@0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/fs-monkey/-/fs-monkey-0.1.1.tgz#2b437993db61a473dcb43447c93eb7be2c88c390"
-  integrity sha512-A+/ZuYOmqACFRmPNUE3fm5EgUziJbyRtfT34PDVU/hLAqRJMEyJsqUw8y8OAcPDRXFSI7B9mNwJqEFlIWmW1DQ==
-
 fs-monkey@1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/fs-monkey/-/fs-monkey-1.0.3.tgz#ae3ac92d53bb328efe0e9a1d9541f6ad8d48e2d3"
@@ -10127,13 +10122,6 @@ sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
   integrity sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=
-
-spyfs@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/spyfs/-/spyfs-1.0.2.tgz#d7cd210e68d8f77d20ab0f0fbf7a69c53717d884"
-  integrity sha512-6UalhK0fI/y2Lo1gFgTfcrIkdysCDGNBXgWNNgTe3AedJUFjuGPOudJw7STAYs6gje00iZjy6tM7gpuKD2bXdg==
-  dependencies:
-    fs-monkey "0.1.1"
 
 st@^2.0.0:
   version "2.0.0"
