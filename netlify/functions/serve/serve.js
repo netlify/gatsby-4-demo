@@ -1,10 +1,9 @@
 // @ts-check
 const { join } = require("path");
 const os = require("os");
-const { existsSync, copySync } = require(`fs-extra`);
+const { existsSync, copySync, emptyDirSync } = require(`fs-extra`);
 const { link } = require(`linkfs`);
 const fs = require(`fs`);
-
 const cacheDir = join(process.cwd(), `.cache`);
 const tmpCache = join(os.tmpdir(), "gatsby", ".cache");
 const rewrites = [
@@ -17,10 +16,36 @@ for (const key in lfs) {
     lfs[key].native = fs[key].native;
   }
 }
-
 global._fsWrapper = lfs;
-
+emptyDirSync(tmpCache);
 const includedDirs = ["data", "page-ssr", "query-engine"];
+
+includedDirs.forEach((dir) => {
+  if (!existsSync(join(tmpCache, dir))) {
+    copySync(join(cacheDir, dir), join(tmpCache, dir));
+  }
+});
+const bundleFile = join(tmpCache, "query-engine", "index.js");
+const bundle = fs.readFileSync(bundleFile, "utf8");
+
+const lmdbCacheString = "process.cwd(), `.cache/${cacheDbFile}`";
+//  I'm so, so sorry
+fs.writeFileSync(
+  bundleFile,
+  bundle.replaceAll(
+    lmdbCacheString,
+    `"${os.tmpdir()}", "gatsby", \`.cache/\${cacheDbFile}\``
+  )
+);
+
+const { GraphQLEngine } = require(tmpCache + "/query-engine");
+
+const {
+  getData,
+  renderHTML,
+  renderPageData,
+} = require(`../../../.cache/page-ssr`);
+
 function reverseFixedPagePath(pageDataRequestPath) {
   return pageDataRequestPath === `index` ? `/` : pageDataRequestPath;
 }
@@ -29,14 +54,6 @@ const DATA_SUFFIX = "/page-data.json";
 const DATA_PREFIX = "/page-data/";
 
 const render = async (eventPath) => {
-  const { GraphQLEngine } = require("../../../.cache/query-engine");
-
-  const {
-    getData,
-    renderHTML,
-    renderPageData,
-  } = require(`../../../.cache/page-ssr`);
-
   const isPageData =
     eventPath.endsWith(DATA_SUFFIX) && eventPath.startsWith(DATA_PREFIX);
 
@@ -48,11 +65,6 @@ const render = async (eventPath) => {
 
   console.time(`start engine`);
   console.log({ isPageData, pathName });
-  includedDirs.forEach((dir) => {
-    if (!existsSync(join(tmpCache, dir))) {
-      copySync(join(cacheDir, dir), join(tmpCache, dir));
-    }
-  });
 
   const dbPath = join(tmpCache, "data", "datastore");
 
