@@ -1,12 +1,10 @@
-import * as React from "react"
-import { graphql, Link } from "gatsby"
-import { Layout } from "../layout/default"
-import { containerCss } from "./post.module.css"
+import * as React from "react";
+import { graphql, Link } from "gatsby";
+import { Layout } from "../layout/default";
+import { containerCss } from "./post.module.css";
 
-export default function BlogPostTemplate({ data, ...rest }) {
-  console.log(JSON.stringify(data, null, 2))
-  console.log(JSON.stringify(rest, null, 2))
-  const post = data.markdownRemark
+export default function BlogPostTemplate({ data, pageContext }) {
+  const post = data.markdownRemark;
 
   return (
     <Layout>
@@ -19,7 +17,7 @@ export default function BlogPostTemplate({ data, ...rest }) {
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
           <p>{post.frontmatter.date}</p>
         </header>
-        <Link to={`/blog/${post.slug}`}>SSG version</Link>
+        <Link to={`/blog/${pageContext.slug}`}>SSG version</Link>
 
         <section
           dangerouslySetInnerHTML={{ __html: post.html }}
@@ -28,7 +26,7 @@ export default function BlogPostTemplate({ data, ...rest }) {
         <hr />
       </article>
     </Layout>
-  )
+  );
 }
 
 /**
@@ -37,7 +35,7 @@ export default function BlogPostTemplate({ data, ...rest }) {
 export function config({ params }) {
   return {
     defer: params.slug !== "hello-world",
-  }
+  };
 }
 
 /**
@@ -48,7 +46,7 @@ export function config({ params }) {
 // }
 
 export const query = graphql`
-  query($id: String) {
+  query ($id: String) {
     allMarkdownRemark {
       nodes {
         id
@@ -65,4 +63,4 @@ export const query = graphql`
       # slug
     }
   }
-`
+`;
