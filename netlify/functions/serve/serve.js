@@ -42,7 +42,7 @@ const render = async (eventPath) => {
 
   const pathName = isPageData
     ? reverseFixedPagePath(
-        eventPath.slice(DATA_PREFIX.length, -DATA_SUFFIX.length)
+        eventPath.slice(DATA_PREFIX.length - 1, 1 - DATA_SUFFIX.length)
       )
     : eventPath;
 
