@@ -21,17 +21,33 @@ for (const key in lfs) {
 global._fsWrapper = lfs;
 
 const includedDirs = ["data", "page-ssr", "query-engine"];
-// function reverseFixedPagePath(pageDataRequestPath) {
-//   return pageDataRequestPath === `index` ? `/` : pageDataRequestPath
-// }
+function reverseFixedPagePath(pageDataRequestPath) {
+  return pageDataRequestPath === `index` ? `/` : pageDataRequestPath;
+}
 
-const render = async (pathName) => {
+const DATA_SUFFIX = "/page-data.json";
+const DATA_PREFIX = "/page-data/";
+
+const render = async (eventPath) => {
   const { GraphQLEngine } = require("../../../.cache/query-engine");
 
-  const { getData, renderHTML } = require(`../../../.cache/page-ssr`);
+  const {
+    getData,
+    renderHTML,
+    renderPageData,
+  } = require(`../../../.cache/page-ssr`);
+
+  const isPageData =
+    eventPath.endsWith(DATA_SUFFIX) && eventPath.startsWith(DATA_PREFIX);
+
+  const pathName = isPageData
+    ? reverseFixedPagePath(
+        eventPath.slice(DATA_PREFIX.length, -DATA_SUFFIX.length)
+      )
+    : eventPath;
 
   console.time(`start engine`);
-
+  console.log({ isPageData, pathName });
   includedDirs.forEach((dir) => {
     if (!existsSync(join(tmpCache, dir))) {
       copySync(join(cacheDir, dir), join(tmpCache, dir));
@@ -44,33 +60,6 @@ const render = async (pathName) => {
     dbPath,
   });
   console.timeEnd(`start engine`);
-  {
-    //   router.get(
-    //     `/page-data/:pagePath(*)/page-data.json`,
-    //     async (req, res, next) => {
-    //       const requestedPagePath = req.params.pagePath
-    //       if (!requestedPagePath) {
-    //         next()
-    //         return
-    //       }
-    //       const pathName = reverseFixedPagePath(requestedPagePath)
-    //       const page = graphqlEngine.findPageByPath(pathName)
-    //       if (page && page.mode === `DSR`) {
-    //         const data = await getData({
-    //           pathName,
-    //           graphqlEngine,
-    //         })
-    //         const results = await renderPageData({
-    //           data,
-    //         })
-    //         res.send(results)
-    //         return
-    //       }
-    //       next()
-    //       return
-    //     }
-    //   )
-  }
 
   console.time(`find page`);
   const page = graphqlEngine.findPageByPath(pathName);
@@ -78,26 +67,41 @@ const render = async (pathName) => {
   console.log({ page });
 
   if (page && page.mode === `DSR`) {
-    console.time(`dsr`);
     const data = await getData({
       pathName,
       graphqlEngine,
     });
-    const results = await renderHTML({
-      data,
-    });
-    console.timeEnd(`dsr`);
-    return results;
+
+    if (isPageData) {
+      return {
+        statusCode: 200,
+        body: JSON.stringify(await renderPageData({ data })),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+    }
+
+    return {
+      statusCode: 200,
+      body: await renderHTML({ data }),
+      headers: {
+        "Content-Type": "text/html; charset=utf-8",
+      },
+    };
   }
 
-  return;
+  return {
+    statusCode: 404,
+    body: `Page not found`,
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8",
+    },
+  };
 };
 
 exports.handler = async function handler(event, context) {
   console.log(process.env);
   console.log(`event: ${JSON.stringify(event)}`);
-  return {
-    statusCode: 200,
-    body: await render(event.path),
-  };
+  return render(event.path);
 };
