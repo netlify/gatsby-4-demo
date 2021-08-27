@@ -1,7 +1,7 @@
 // @ts-check
 const { join } = require("path");
 const os = require("os");
-const { copy, existsSync } = require(`fs-extra`);
+const { existsSync, copySync } = require(`fs-extra`);
 const { link } = require(`linkfs`);
 const fs = require(`fs`);
 
@@ -20,6 +20,7 @@ for (const key in lfs) {
 
 global._fsWrapper = lfs;
 
+const includedDirs = ["data", "page-ssr", "query-engine"];
 // function reverseFixedPagePath(pageDataRequestPath) {
 //   return pageDataRequestPath === `index` ? `/` : pageDataRequestPath
 // }
@@ -30,9 +31,12 @@ const render = async (pathName) => {
   const { getData, renderHTML } = require(`../../../.cache/page-ssr`);
 
   console.time(`start engine`);
-  if (!existsSync(tmpCache)) {
-    await copy(cacheDir, tmpCache);
-  }
+
+  includedDirs.forEach((dir) => {
+    if (!existsSync(join(tmpCache, dir))) {
+      copySync(join(cacheDir, dir), join(tmpCache, dir));
+    }
+  });
 
   const dbPath = join(tmpCache, "data", "datastore");
 
