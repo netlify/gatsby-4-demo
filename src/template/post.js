@@ -4,6 +4,7 @@ import { Layout } from "../layout/default";
 import { containerCss } from "./post.module.css";
 
 export default function BlogPostTemplate({ data, pageContext }) {
+  console.log(JSON.stringify(data, null, 2));
   const post = data.markdownRemark;
 
   return (
