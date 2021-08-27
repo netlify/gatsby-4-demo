@@ -6,6 +6,8 @@ const { link } = require(`linkfs`);
 const fs = require(`fs`);
 const cacheDir = join(process.cwd(), `.cache`);
 const tmpCache = join(os.tmpdir(), "gatsby", ".cache");
+const { builder } = require("@netlify/functions");
+
 const rewrites = [
   [cacheDir, tmpCache],
   [join(process.cwd(), "public"), join(os.tmpdir(), "gatsby", "public")],
@@ -107,8 +109,8 @@ const render = async (eventPath) => {
   };
 };
 
-exports.handler = async function handler(event, context) {
+exports.handler = builder(async function handler(event, context) {
   console.log(process.env);
   console.log(`event: ${JSON.stringify(event)}`);
   return render(event.path);
-};
+});
