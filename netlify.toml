@@ -5,7 +5,7 @@ publish="public"
 [functions]
 directory = "netlify/functions"
 node_bundler = "zisi"
-external_node_modules = ["cbor-x", "babel-runtime", "lmdb-store"]
+# external_node_modules = ["cbor-x", "babel-runtime", "lmdb-store"]
 included_files = [".cache/data/**", ".cache/query-engine/**", ".cache/page-ssr/**"]
 
 [[redirects]]
