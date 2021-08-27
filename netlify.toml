@@ -15,3 +15,6 @@ status = 200
 
 [dev]
 framework = "#static"
+
+[[plugins]]
+package = "./plugin"
