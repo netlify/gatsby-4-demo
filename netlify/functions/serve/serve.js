@@ -1,20 +1,23 @@
+// @ts-check
 const { join } = require("path");
-
+const os = require("os");
 const { copy, existsSync } = require(`fs-extra`);
-// const { fs } = require(`memfs`);
 const { link } = require(`linkfs`);
-const realFs = require(`fs`);
+const fs = require(`fs`);
 
-const cacheDir = join(process.env.LAMBDA_TASK_ROOT, `.cache`);
-const tmpCache = join("/tmp", "gatsby", ".cache");
+const cacheDir = join(process.cwd(), `.cache`);
+const tmpCache = join(os.tmpdir(), "gatsby", ".cache");
 const rewrites = [
   [cacheDir, tmpCache],
-  [
-    join(process.env.LAMBDA_TASK_ROOT, "public"),
-    join("/tmp", "gatsby", "public"),
-  ],
+  [join(process.cwd(), "public"), join(os.tmpdir(), "gatsby", "public")],
 ];
-global._fsWrapper = link(realFs, rewrites);
+const lfs = link(fs, rewrites);
+for (const key in lfs) {
+  if (Object.hasOwnProperty.call(fs[key], "native")) {
+    lfs[key].native = fs[key].native;
+  }
+}
+global._fsWrapper = lfs;
 
 // function reverseFixedPagePath(pageDataRequestPath) {
 //   return pageDataRequestPath === `index` ? `/` : pageDataRequestPath
@@ -25,9 +28,7 @@ const render = async (pathName) => {
 
   const { getData, renderHTML } = require(`../../../.cache/page-ssr`);
 
-  console.log(rewrites);
   console.time(`start engine`);
-
   if (!existsSync(tmpCache)) {
     await copy(cacheDir, tmpCache);
   }
