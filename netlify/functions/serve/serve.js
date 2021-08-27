@@ -29,14 +29,9 @@ const bundleFile = join(tmpCache, "query-engine", "index.js");
 const bundle = fs.readFileSync(bundleFile, "utf8");
 
 const lmdbCacheString = "process.cwd(), `.cache/${cacheDbFile}`";
+const replacement = `"${os.tmpdir()}", "gatsby", \`.cache/\${cacheDbFile}\``;
 //  I'm so, so sorry
-fs.writeFileSync(
-  bundleFile,
-  bundle.replaceAll(
-    lmdbCacheString,
-    `"${os.tmpdir()}", "gatsby", \`.cache/\${cacheDbFile}\``
-  )
-);
+fs.writeFileSync(bundleFile, bundle.replace(lmdbCacheString, replacement));
 
 const { GraphQLEngine } = require(tmpCache + "/query-engine");
 
