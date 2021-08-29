@@ -8,6 +8,10 @@ const {
   renderHTML,
   renderPageData,
 } = require(`../../../.cache/page-ssr`);
+
+// So that it's bundled with the build
+require("@babel/runtime/helpers/interopRequireDefault");
+
 const { getPagePathFromPageDataPath } = require("gatsby-core-utils");
 
 prepareFilesystem(["data", "page-ssr", "query-engine"]);

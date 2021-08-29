@@ -27,7 +27,7 @@ to = "/.netlify/functions/serve"
 status = 200
 
 [dev]
-# Do it doesn't run gatsby develop
+# So it doesn't run gatsby develop
 framework = "#static"
 
 [[plugins]]
