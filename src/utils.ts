@@ -1,4 +1,3 @@
-// @ts-check
 import { join } from "path";
 import os from "os";
 import { existsSync, copySync, emptyDirSync } from "fs-extra";

@@ -1,5 +1,7 @@
 import { join } from "path";
 import { builder, HandlerResponse } from "@netlify/functions";
+import etag from "etag";
+
 import {
   prepareFilesystem,
   TEMP_CACHE_DIR,
@@ -35,19 +37,24 @@ const render = async (eventPath: string): Promise<HandlerResponse> => {
     });
 
     if (isPageData) {
+      const body = JSON.stringify(await renderPageData({ data }));
       return {
         statusCode: 200,
-        body: JSON.stringify(await renderPageData({ data })),
+        body,
         headers: {
+          ETag: etag(body),
           "Content-Type": "application/json",
         },
       };
     }
 
+    const body = await renderHTML({ data });
+
     return {
       statusCode: 200,
-      body: await renderHTML({ data }),
+      body,
       headers: {
+        ETag: etag(body),
         "Content-Type": "text/html; charset=utf-8",
       },
     };
