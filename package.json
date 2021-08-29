@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@babel/runtime": "^7.15.3",
     "@netlify/functions": "^0.7.2",
     "@sindresorhus/slugify": "^1.0.0",
     "fs-extra": "^10.0.0",
