@@ -1,17 +1,20 @@
 import { HandlerEvent, HandlerResponse } from "@netlify/functions";
 import fs from "fs";
+import etag from "etag";
 
 const sendResponse = (fileName: string, mimeType: string): HandlerResponse => {
+  const body = fs.readFileSync(
+    require.resolve(`gatsby-graphiql-explorer/${fileName}`),
+    "utf-8"
+  );
   return {
     statusCode: 200,
     headers: {
       "Content-Type": mimeType,
       "Access-Control-Allow-Origin": "*",
+      ETag: etag(body),
     },
-    body: fs.readFileSync(
-      require.resolve(`gatsby-graphiql-explorer/${fileName}`),
-      "utf-8"
-    ),
+    body,
   };
 };
 export function serveStatic(event: HandlerEvent): HandlerResponse {

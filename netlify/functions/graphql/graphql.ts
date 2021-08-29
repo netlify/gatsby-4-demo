@@ -1,7 +1,6 @@
 import { prepareFilesystem, getGraphQLEngine } from "../../../src/utils";
 import { serveStatic } from "./static";
 import { Handler, HandlerResponse } from "@netlify/functions";
-prepareFilesystem(["data", "query-engine"]);
 
 function errorResponse(message: string): HandlerResponse {
   return {
@@ -19,6 +18,7 @@ export const handler: Handler = async function handler(event, context) {
   if (event.httpMethod === "GET") {
     return serveStatic(event);
   }
+  prepareFilesystem(["data", "query-engine"]);
 
   if (!event.body) {
     return errorResponse("No query provided");

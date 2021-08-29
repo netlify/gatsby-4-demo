@@ -1,6 +1,7 @@
 import { join } from "path";
 import { builder, HandlerResponse } from "@netlify/functions";
 import etag from "etag";
+import type { IGatsbyPage } from "../../../.cache/query-engine";
 
 import {
   prepareFilesystem,
@@ -28,7 +29,8 @@ const render = async (eventPath: string): Promise<HandlerResponse> => {
     : eventPath;
 
   const graphqlEngine = getGraphQLEngine();
-  const page = graphqlEngine.findPageByPath(pathName);
+  const page: IGatsbyPage & { mode?: string } =
+    graphqlEngine.findPageByPath(pathName);
 
   if (page && page.mode === `DSR`) {
     const data = await getData({
