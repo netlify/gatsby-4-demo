@@ -22,5 +22,8 @@
     "start": "npm run build && npm run serve",
     "serve": "gatsby serve",
     "postinstall": "./patch-gatsby.sh"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.12"
   }
 }
