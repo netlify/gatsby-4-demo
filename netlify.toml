@@ -7,8 +7,19 @@ directory = "netlify/functions"
 # external_node_modules = ["cbor-x", "babel-runtime", "lmdb-store"]
 included_files = [".cache/data/**", ".cache/query-engine/**", ".cache/page-ssr/**"]
 
+[functions.serve]
+included_files = [".cache/data/**", ".cache/query-engine/**", ".cache/page-ssr/**"]
+
+[functions.graphql]
+included_files = [".cache/data/**", ".cache/query-engine/**", "node_modules/gatsby-graphiql-explorer/index.html", "node_modules/gatsby-graphiql-explorer/app.js"]
+
 [[redirects]]
-from = "/___graphql"
+from = "/___graphql*"
+to = "/.netlify/functions/graphql"
+status = 200
+
+[[redirects]]
+from = "/___graphiql*"
 to = "/.netlify/functions/graphql"
 status = 200
 
