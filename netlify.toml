@@ -10,7 +10,8 @@ node_bundler = "esbuild"
 included_files = [
     ".cache/data/**",
     ".cache/query-engine/**",
-    ".cache/page-ssr/**"
+    ".cache/page-ssr/**",
+    "node_modules/msgpackr-extract/**"
 ]
 
 [functions.graphql]
@@ -18,7 +19,8 @@ included_files = [
     ".cache/data/**",
     ".cache/query-engine/**",
     "node_modules/gatsby-graphiql-explorer/index.html",
-    "node_modules/gatsby-graphiql-explorer/app.js"
+    "node_modules/gatsby-graphiql-explorer/app.js",
+    "node_modules/msgpackr-extract/**"
 ]
 
 [[redirects]]

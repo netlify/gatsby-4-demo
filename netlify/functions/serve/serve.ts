@@ -1,14 +1,14 @@
 import { join } from "path";
-import { builder, Handler, HandlerResponse } from "@netlify/functions";
+import { builder, HandlerResponse } from "@netlify/functions";
 import {
   prepareFilesystem,
   TEMP_CACHE_DIR,
   getPagePathFromPageDataPath,
+  getGraphQLEngine,
 } from "../../../src/utils";
 
 prepareFilesystem(["data", "page-ssr", "query-engine"]);
 
-const { GraphQLEngine } = require(join(TEMP_CACHE_DIR, "query-engine"));
 const { getData, renderHTML, renderPageData } = require(join(
   TEMP_CACHE_DIR,
   "page-ssr"
@@ -25,11 +25,7 @@ const render = async (eventPath: string): Promise<HandlerResponse> => {
     ? getPagePathFromPageDataPath(eventPath)
     : eventPath;
 
-  const dbPath = join(TEMP_CACHE_DIR, "data", "datastore");
-
-  const graphqlEngine = new GraphQLEngine({
-    dbPath,
-  });
+  const graphqlEngine = getGraphQLEngine();
   const page = graphqlEngine.findPageByPath(pathName);
 
   if (page && page.mode === `DSR`) {

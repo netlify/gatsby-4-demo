@@ -4,6 +4,7 @@ import os from "os";
 import { existsSync, copySync, emptyDirSync } from "fs-extra";
 import { link } from "linkfs";
 import fs from "fs";
+import type { GraphQLEngine } from "../.cache/query-engine";
 
 export const CACHE_DIR = join(process.cwd(), `.cache`);
 export const TEMP_CACHE_DIR = join(os.tmpdir(), "gatsby", ".cache");
@@ -48,4 +49,19 @@ export function getPagePathFromPageDataPath(
   }
 
   return null;
+}
+
+export function getGraphQLEngine() {
+  const { GraphQLEngine: GQE } = require(join(
+    TEMP_CACHE_DIR,
+    "query-engine"
+  )) as {
+    GraphQLEngine: typeof GraphQLEngine;
+  };
+
+  const dbPath = join(TEMP_CACHE_DIR, "data", "datastore");
+
+  return new GQE({
+    dbPath,
+  });
 }

@@ -1,13 +1,7 @@
-import { join } from "path";
-import { prepareFilesystem, TEMP_CACHE_DIR } from "../../../src/utils";
+import { prepareFilesystem, getGraphQLEngine } from "../../../src/utils";
 import { serveStatic } from "./static";
 import { Handler, HandlerResponse } from "@netlify/functions";
-import type { GraphQLEngine as GraphQLEngineType } from "../../../.cache/query-engine";
 prepareFilesystem(["data", "query-engine"]);
-
-const { GraphQLEngine } = require(process.cwd() + "/.cache/query-engine") as {
-  GraphQLEngine: typeof GraphQLEngineType;
-};
 
 function errorResponse(message: string): HandlerResponse {
   return {
@@ -25,11 +19,6 @@ export const handler: Handler = async function handler(event, context) {
   if (event.httpMethod === "GET") {
     return serveStatic(event);
   }
-  const dbPath = join(TEMP_CACHE_DIR, "data", "datastore");
-
-  const graphqlEngine = new GraphQLEngine({
-    dbPath,
-  });
 
   if (!event.body) {
     return errorResponse("No query provided");
@@ -47,7 +36,7 @@ export const handler: Handler = async function handler(event, context) {
   }
 
   try {
-    const result = await graphqlEngine.runQuery(query, {});
+    const result = await getGraphQLEngine().runQuery(query, {});
     return {
       statusCode: 200,
       body: JSON.stringify({ extensions: {}, ...result }),
