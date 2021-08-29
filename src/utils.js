@@ -11,7 +11,12 @@ function prepareFilesystem(includedDirs) {
   const rewrites = [
     [CACHE_DIR, TEMP_CACHE_DIR],
     [join(process.cwd(), "public"), join(os.tmpdir(), "gatsby", "public")],
+    [
+      join(__dirname, "assets"),
+      join(TEMP_CACHE_DIR, ".cache", "query-engine", "assets"),
+    ],
   ];
+  console.log(rewrites);
   const lfs = link(fs, rewrites);
   for (const key in lfs) {
     if (Object.hasOwnProperty.call(fs[key], "native")) {

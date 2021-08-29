@@ -9,12 +9,11 @@ const {
 
 prepareFilesystem(["data", "page-ssr", "query-engine"]);
 
-const { GraphQLEngine } = require("../../../.cache/query-engine");
-const {
-  getData,
-  renderHTML,
-  renderPageData,
-} = require(`../../../.cache/page-ssr`);
+const { GraphQLEngine } = require(join(TEMP_CACHE_DIR, "query-engine"));
+const { getData, renderHTML, renderPageData } = require(join(
+  TEMP_CACHE_DIR,
+  "page-ssr"
+));
 
 const DATA_SUFFIX = "/page-data.json";
 const DATA_PREFIX = "/page-data/";

@@ -1,15 +1,25 @@
 [build]
 command = "GATSBY_EXPERIMENTAL_GENERATE_ENGINES=1 yarn build"
-publish="public"
+publish = "public"
 
 [functions]
 directory = "netlify/functions"
+node_bundler = "esbuild"
 
 [functions.serve]
-included_files = [".cache/data/**", ".cache/query-engine/**", ".cache/page-ssr/**"]
+included_files = [
+    ".cache/data/**",
+    ".cache/query-engine/**",
+    ".cache/page-ssr/**"
+]
 
 [functions.graphql]
-included_files = [".cache/data/**", ".cache/query-engine/**", "node_modules/gatsby-graphiql-explorer/index.html", "node_modules/gatsby-graphiql-explorer/app.js"]
+included_files = [
+    ".cache/data/**",
+    ".cache/query-engine/**",
+    "node_modules/gatsby-graphiql-explorer/index.html",
+    "node_modules/gatsby-graphiql-explorer/app.js"
+]
 
 [[redirects]]
 from = "/___graphql*"
