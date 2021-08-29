@@ -6,17 +6,15 @@ const {
   TEMP_CACHE_DIR,
   getPagePathFromPageDataPath,
 } = require("../../../src/utils");
+
+prepareFilesystem(["data", "page-ssr", "query-engine"]);
+
 const { GraphQLEngine } = require("../../../.cache/query-engine");
 const {
   getData,
   renderHTML,
   renderPageData,
 } = require(`../../../.cache/page-ssr`);
-
-// So that it's bundled with the build
-require("@babel/runtime/helpers/interopRequireDefault");
-
-prepareFilesystem(["data", "page-ssr", "query-engine"]);
 
 const DATA_SUFFIX = "/page-data.json";
 const DATA_PREFIX = "/page-data/";
