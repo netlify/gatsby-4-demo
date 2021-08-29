@@ -1,11 +1,10 @@
-// @ts-check
-const { join } = require("path");
-const { builder } = require("@netlify/functions");
-const {
+import { join } from "path";
+import { builder, Handler, HandlerResponse } from "@netlify/functions";
+import {
   prepareFilesystem,
   TEMP_CACHE_DIR,
   getPagePathFromPageDataPath,
-} = require("../../../src/utils");
+} from "../../../src/utils";
 
 prepareFilesystem(["data", "page-ssr", "query-engine"]);
 
@@ -18,7 +17,7 @@ const { getData, renderHTML, renderPageData } = require(join(
 const DATA_SUFFIX = "/page-data.json";
 const DATA_PREFIX = "/page-data/";
 
-const render = async (eventPath) => {
+const render = async (eventPath: string): Promise<HandlerResponse> => {
   const isPageData =
     eventPath.endsWith(DATA_SUFFIX) && eventPath.startsWith(DATA_PREFIX);
 
