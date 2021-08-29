@@ -1,7 +1,11 @@
 // @ts-check
 const { join } = require("path");
 const { builder } = require("@netlify/functions");
-const { prepareFilesystem, TEMP_CACHE_DIR } = require("../../../src/utils");
+const {
+  prepareFilesystem,
+  TEMP_CACHE_DIR,
+  getPagePathFromPageDataPath,
+} = require("../../../src/utils");
 const { GraphQLEngine } = require("../../../.cache/query-engine");
 const {
   getData,
@@ -11,8 +15,6 @@ const {
 
 // So that it's bundled with the build
 require("@babel/runtime/helpers/interopRequireDefault");
-
-const { getPagePathFromPageDataPath } = require("gatsby-core-utils");
 
 prepareFilesystem(["data", "page-ssr", "query-engine"]);
 

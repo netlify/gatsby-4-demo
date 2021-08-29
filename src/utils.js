@@ -28,8 +28,27 @@ function prepareFilesystem(includedDirs) {
   });
 }
 
+// Inlined from gatsby-core-utils
+
+function reverseFixedPagePath(pageDataRequestPath) {
+  return pageDataRequestPath === `index` ? `/` : pageDataRequestPath;
+}
+
+function getPagePathFromPageDataPath(pageDataPath) {
+  const matches = pageDataPath.matchAll(
+    /^\/?page-data\/(.+)\/page-data.json$/gm
+  );
+
+  for (const [, requestedPagePath] of matches) {
+    return reverseFixedPagePath(requestedPagePath);
+  }
+
+  return null;
+}
+
 module.exports = {
   prepareFilesystem,
   CACHE_DIR,
   TEMP_CACHE_DIR,
+  getPagePathFromPageDataPath,
 };
