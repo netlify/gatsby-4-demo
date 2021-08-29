@@ -2,20 +2,15 @@
 const { join } = require("path");
 const { builder } = require("@netlify/functions");
 const { prepareFilesystem, TEMP_CACHE_DIR } = require("../../../src/utils");
-
-prepareFilesystem(["data", "page-ssr", "query-engine"]);
-
-const { GraphQLEngine } = require(process.cwd() + "/.cache/query-engine");
-
+const { GraphQLEngine } = require("../../../.cache/query-engine");
 const {
   getData,
   renderHTML,
   renderPageData,
 } = require(`../../../.cache/page-ssr`);
+const { getPagePathFromPageDataPath } = require("gatsby-core-utils");
 
-function reverseFixedPagePath(pageDataRequestPath) {
-  return pageDataRequestPath === `index` ? `/` : pageDataRequestPath;
-}
+prepareFilesystem(["data", "page-ssr", "query-engine"]);
 
 const DATA_SUFFIX = "/page-data.json";
 const DATA_PREFIX = "/page-data/";
@@ -25,9 +20,7 @@ const render = async (eventPath) => {
     eventPath.endsWith(DATA_SUFFIX) && eventPath.startsWith(DATA_PREFIX);
 
   const pathName = isPageData
-    ? reverseFixedPagePath(
-        eventPath.slice(DATA_PREFIX.length - 1, 1 - DATA_SUFFIX.length)
-      )
+    ? getPagePathFromPageDataPath(eventPath)
     : eventPath;
 
   const dbPath = join(TEMP_CACHE_DIR, "data", "datastore");
