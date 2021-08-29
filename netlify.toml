@@ -6,7 +6,7 @@ publish = "public"
 directory = "netlify/functions"
 node_bundler = "esbuild"
 
-[functions.serve]
+[functions.dsr]
 included_files = [
     ".cache/data/**",
     ".cache/query-engine/**",
@@ -35,7 +35,7 @@ status = 200
 
 [[redirects]]
 from = "/*"
-to = "/.netlify/functions/serve"
+to = "/.netlify/functions/dsr"
 status = 200
 
 [dev]
