@@ -1,6 +1,6 @@
-import * as React from "react"
-import { graphql, Link } from "gatsby"
-import { Layout } from "../layout/default"
+import * as React from "react";
+import { graphql, Link } from "gatsby";
+import { Layout } from "../layout/default";
 import {
   postsListCss,
   postListItemCss,
@@ -8,13 +8,13 @@ import {
   postTeaserTitleCss,
   postTeaserDescriptionCss,
   postTeaserLinkCss,
-} from "./index.module.css"
+} from "./index.module.css";
 
 export default function Home({ data }) {
   return (
     <Layout>
       <ul className={postsListCss}>
-        {data.allMarkdownRemark.nodes.map(node => {
+        {data.allMarkdownRemark.nodes.map((node) => {
           return (
             <li className={postListItemCss}>
               <div className={postTeaserCss}>
@@ -24,12 +24,15 @@ export default function Home({ data }) {
                     className={postTeaserLinkCss}
                   >
                     {node.frontmatter.title}
-                  </Link> (<Link
+                  </Link>{" "}
+                  (
+                  <Link
                     to={`/dsr-blog/${node.slug}/`}
                     className={postTeaserLinkCss}
                   >
                     DSR
-                  </Link>)
+                  </Link>
+                  )
                 </h2>
                 <p className={postTeaserDescriptionCss}>
                   <Link
@@ -41,10 +44,10 @@ export default function Home({ data }) {
                 </p>
               </div>
             </li>
-          )
+          );
         })}
 
-        <li className={postListItemCss}>
+        {/* <li className={postListItemCss}>
           <div className={postTeaserCss}>
             <h2 className={postTeaserTitleCss}>
               <Link to={`/products/`} className={postTeaserLinkCss}>
@@ -52,10 +55,10 @@ export default function Home({ data }) {
               </Link>
             </h2>
           </div>
-        </li>
+        </li> */}
       </ul>
     </Layout>
-  )
+  );
 }
 
 export const query = graphql`
@@ -70,4 +73,4 @@ export const query = graphql`
       }
     }
   }
-`
+`;
