@@ -55,10 +55,7 @@ export function getPagePathFromPageDataPath(
 }
 
 export function getGraphQLEngine() {
-  const { GraphQLEngine: GQE } = require(join(
-    TEMP_CACHE_DIR,
-    "query-engine"
-  )) as {
+  const { GraphQLEngine: GQE } = require(join(CACHE_DIR, "query-engine")) as {
     GraphQLEngine: typeof GraphQLEngine;
   };
 
