@@ -41,12 +41,6 @@ to = "/.netlify/functions/ssr"
 status = 200
 
 [[redirects]]
-# We'll dynamically generate these in the plugin
-from = "/products/*"
-to = "/.netlify/functions/ssr"
-status = 200
-
-[[redirects]]
 from = "/*"
 to = "/.netlify/functions/dsr"
 status = 200
