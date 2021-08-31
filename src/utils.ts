@@ -25,7 +25,9 @@ export function prepareFilesystem(includedDirs: Array<string>) {
 
   includedDirs.forEach((dir) => {
     if (!existsSync(join(TEMP_CACHE_DIR, dir))) {
+      console.time(`Copying ${dir}`);
       copySync(join(CACHE_DIR, dir), join(TEMP_CACHE_DIR, dir));
+      console.timeEnd(`Copying ${dir}`);
     }
   });
 }
