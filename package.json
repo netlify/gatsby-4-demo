@@ -25,6 +25,8 @@
     "postinstall": "./patch-gatsby.sh"
   },
   "devDependencies": {
-    "@types/fs-extra": "^9.0.12"
+    "@types/fs-extra": "^9.0.12",
+    "co-body": "^6.1.0",
+    "multer": "^1.4.3"
   }
 }

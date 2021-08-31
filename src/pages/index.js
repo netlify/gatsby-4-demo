@@ -47,15 +47,25 @@ export default function Home({ data }) {
           );
         })}
 
-        {/* <li className={postListItemCss}>
+        <li className={postListItemCss}>
           <div className={postTeaserCss}>
             <h2 className={postTeaserTitleCss}>
               <Link to={`/products/`} className={postTeaserLinkCss}>
-                Products
+                Products (SSR)
               </Link>
             </h2>
           </div>
-        </li> */}
+        </li>
+
+        <li className={postListItemCss}>
+          <div className={postTeaserCss}>
+            <h2 className={postTeaserTitleCss}>
+              <Link to={`/api/hello-world`} className={postTeaserLinkCss}>
+                API route
+              </Link>
+            </h2>
+          </div>
+        </li>
       </ul>
     </Layout>
   );
