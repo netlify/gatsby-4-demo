@@ -5,7 +5,7 @@ import type { IGatsbyPage } from "../../../.cache/query-engine";
 
 import {
   prepareFilesystem,
-  TEMP_CACHE_DIR,
+  CACHE_DIR,
   getPagePathFromPageDataPath,
   getGraphQLEngine,
 } from "../../../src/utils";
@@ -13,7 +13,7 @@ import {
 prepareFilesystem(["data"]);
 
 const { getData, renderHTML, renderPageData } = require(join(
-  TEMP_CACHE_DIR,
+  CACHE_DIR,
   "page-ssr"
 ));
 
