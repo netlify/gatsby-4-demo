@@ -66,6 +66,15 @@ export default function Home({ data }) {
             </h2>
           </div>
         </li>
+        <li className={postListItemCss}>
+          <div className={postTeaserCss}>
+            <h2 className={postTeaserTitleCss}>
+              <Link to={`/___graphql`} className={postTeaserLinkCss}>
+                GraphiQL
+              </Link>
+            </h2>
+          </div>
+        </li>
       </ul>
     </Layout>
   );
