@@ -10,7 +10,9 @@ export const TEMP_CACHE_DIR = join(os.tmpdir(), "gatsby", ".cache");
 
 export function prepareFilesystem(includedDirs: Array<string>) {
   const rewrites = [
-    [CACHE_DIR, TEMP_CACHE_DIR],
+    [join(CACHE_DIR, "caches"), join(TEMP_CACHE_DIR, "caches")],
+    [join(CACHE_DIR, "caches-lmdb"), join(TEMP_CACHE_DIR, "caches-lmdb")],
+    [join(CACHE_DIR, "data"), join(TEMP_CACHE_DIR, "data")],
     [join(process.cwd(), "public"), join(os.tmpdir(), "gatsby", "public")],
   ];
   console.log(rewrites);

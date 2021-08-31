@@ -10,7 +10,7 @@ import {
   getGraphQLEngine,
 } from "../../../src/utils";
 
-prepareFilesystem(["data", "page-ssr", "query-engine"]);
+prepareFilesystem(["data"]);
 
 const { getData, renderHTML, renderPageData } = require(join(
   TEMP_CACHE_DIR,

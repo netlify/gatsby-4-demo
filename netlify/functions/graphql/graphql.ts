@@ -18,7 +18,7 @@ export const handler: Handler = async function handler(event, context) {
   if (event.httpMethod === "GET") {
     return serveStatic(event);
   }
-  prepareFilesystem(["data", "query-engine"]);
+  prepareFilesystem(["data"]);
 
   if (!event.body) {
     return errorResponse("No query provided");
