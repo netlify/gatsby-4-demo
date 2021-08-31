@@ -6,6 +6,9 @@ publish = "public"
 directory = "netlify/functions"
 node_bundler = "esbuild"
 
+[functions.ssr]
+included_files = [".cache/functions/**"]
+
 [functions.dsr]
 included_files = [
     ".cache/data/**",
