@@ -3,9 +3,6 @@ module.exports = {
     title: `Gatsby 9689ff demo`,
   },
   plugins: [
-    // {
-    //   resolve: "gatsby-plugin-gatsby-cloud",
-    // },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -20,4 +17,4 @@ module.exports = {
       },
     },
   ],
-}
+};

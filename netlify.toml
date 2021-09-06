@@ -1,21 +1,9 @@
 [build]
-command = "GATSBY_EXPERIMENTAL_GENERATE_ENGINES=1 yarn build"
+command = "yarn build"
 publish = "public"
 
 [functions]
 directory = "netlify/functions"
-node_bundler = "esbuild"
-external_node_modules = ["msgpackr-extract"]
-
-[functions.ssr]
-included_files = [".cache/functions/**"]
-
-[functions.dsr]
-included_files = [
-    ".cache/data/**",
-    ".cache/query-engine/**",
-    ".cache/page-ssr/**",
-]
 
 [functions.graphql]
 included_files = [
@@ -24,6 +12,8 @@ included_files = [
     "node_modules/gatsby-graphiql-explorer/index.html",
     "node_modules/gatsby-graphiql-explorer/app.js",
 ]
+external_node_modules = ["msgpackr-extract"]
+node_bundler = "esbuild"
 
 [[redirects]]
 from = "/___graphql*"
@@ -35,19 +25,9 @@ from = "/___graphiql*"
 to = "/.netlify/functions/graphql"
 status = 200
 
-[[redirects]]
-from = "/api/*"
-to = "/.netlify/functions/ssr"
-status = 200
-
-[[redirects]]
-from = "/*"
-to = "/.netlify/functions/dsr"
-status = 200
-
 [dev]
 # So it doesn't run gatsby develop
 framework = "#static"
 
 [[plugins]]
-package = "./plugin"
+package = "@netlify/plugin-gatsby"

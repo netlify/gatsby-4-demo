@@ -60,18 +60,18 @@ export default function Home({ data }) {
         <li className={postListItemCss}>
           <div className={postTeaserCss}>
             <h2 className={postTeaserTitleCss}>
-              <Link to={`/api/hello-world`} className={postTeaserLinkCss}>
+              <a href={`/api/hello-world`} className={postTeaserLinkCss}>
                 API route
-              </Link>
+              </a>
             </h2>
           </div>
         </li>
         <li className={postListItemCss}>
           <div className={postTeaserCss}>
             <h2 className={postTeaserTitleCss}>
-              <Link to={`/___graphql`} className={postTeaserLinkCss}>
+              <a href={`/___graphql`} className={postTeaserLinkCss}>
                 GraphiQL
-              </Link>
+              </a>
             </h2>
           </div>
         </li>

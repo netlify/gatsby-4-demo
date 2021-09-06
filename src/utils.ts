@@ -3,7 +3,7 @@ import os from "os";
 import { existsSync, copySync, emptyDirSync } from "fs-extra";
 import { link } from "linkfs";
 import fs from "fs";
-import type { GraphQLEngine } from "../.cache/query-engine";
+import type { GraphQLEngine } from "gatsby/cache-dir/query-engine";
 
 export const CACHE_DIR = join(process.cwd(), `.cache`);
 export const TEMP_CACHE_DIR = join(os.tmpdir(), "gatsby", ".cache");
