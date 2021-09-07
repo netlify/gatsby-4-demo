@@ -1,6 +1,6 @@
-import * as React from "react";
-import { graphql, Link } from "gatsby";
-import { Layout } from "../layout/default";
+import * as React from 'react'
+import { graphql, Link } from 'gatsby'
+import { Layout } from '../layout/default'
 import {
   postsListCss,
   postListItemCss,
@@ -8,7 +8,7 @@ import {
   postTeaserTitleCss,
   postTeaserDescriptionCss,
   postTeaserLinkCss,
-} from "./index.module.css";
+} from './index.module.css'
 
 export default function Home({ data }) {
   return (
@@ -19,13 +19,14 @@ export default function Home({ data }) {
             <li className={postListItemCss}>
               <div className={postTeaserCss}>
                 <h2 className={postTeaserTitleCss}>
+                  {node.frontmatter.title} (
                   <Link
                     to={`/blog/${node.slug}/`}
                     className={postTeaserLinkCss}
                   >
-                    {node.frontmatter.title}
-                  </Link>{" "}
-                  (
+                    SSG
+                  </Link>
+                  ) (
                   <Link
                     to={`/dsr-blog/${node.slug}/`}
                     className={postTeaserLinkCss}
@@ -44,7 +45,7 @@ export default function Home({ data }) {
                 </p>
               </div>
             </li>
-          );
+          )
         })}
 
         <li className={postListItemCss}>
@@ -77,7 +78,7 @@ export default function Home({ data }) {
         </li>
       </ul>
     </Layout>
-  );
+  )
 }
 
 export const query = graphql`
@@ -92,4 +93,4 @@ export const query = graphql`
       }
     }
   }
-`;
+`

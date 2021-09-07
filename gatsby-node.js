@@ -1,5 +1,5 @@
-const path = require("path")
-const slugify = require("@sindresorhus/slugify")
+const path = require('path')
+const slugify = require('@sindresorhus/slugify')
 
 exports.createSchemaCustomization = function createSchemaCustomization({
   actions,
@@ -15,17 +15,17 @@ exports.createSchemaCustomization = function createSchemaCustomization({
     }
   `,
     schema.buildObjectType({
-      name: "MarkdownRemark",
+      name: 'MarkdownRemark',
       fields: {
-        frontmatter: "Frontmatter!",
+        frontmatter: 'Frontmatter!',
         slug: {
-          type: "String!",
+          type: 'String!',
           resolve(parent) {
             return slugify(parent.frontmatter.title)
           },
         },
       },
-      interfaces: ["Node"],
+      interfaces: ['Node'],
       extensions: {
         infer: true,
       },
@@ -68,9 +68,10 @@ exports.createPages = async function createPages({
       ownerNodeId: node.id,
       context: {
         id: node.id,
-        slug: node.slug
+        slug: node.slug,
       },
-      defer: node.slug !== "hello-world",
+      defer: true,
+      // defer: node.slug !== "hello-world",
     })
   }
 }
