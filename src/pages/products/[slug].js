@@ -5,7 +5,11 @@ import { Layout } from "../../layout/default";
 
 export default function BlogPostTemplate({ serverData }) {
   if (!serverData) {
-    return <div>Server Error</div>;
+    return (
+      <Layout>
+        <p>No serverData. SSR probably isn't enabled.</p>
+      </Layout>
+    );
   }
 
   return (

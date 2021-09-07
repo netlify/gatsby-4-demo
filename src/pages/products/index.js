@@ -11,6 +11,13 @@ import {
 } from "../index.module.css";
 
 export default function ProductListing({ serverData }) {
+  if (!serverData) {
+    return (
+      <Layout>
+        <p>No serverData. SSR probably isn't enabled.</p>
+      </Layout>
+    );
+  }
   return (
     <Layout>
       <ul className={postsListCss}>
