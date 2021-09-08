@@ -35,6 +35,16 @@ from = "/products/:slug"
 to = "/.netlify/functions/__ssr"
 status = 200
 
+[[redirects]]
+from = "/page-data/products/page-data.json"
+to = "/.netlify/functions/__ssr"
+status = 200
+
+[[redirects]]
+from = "/page-data/products/:slug/page-data.json"
+to = "/.netlify/functions/__ssr"
+status = 200
+
 [dev]
 # So it doesn't run gatsby develop
 framework = "#static"
