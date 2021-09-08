@@ -85,7 +85,9 @@ query allProducts {
 
     if (data) {
       return {
-        products: data.allProducts.data,
+        props: {
+          products: data.allProducts.data,
+        }
       };
     }
   } catch (err) {

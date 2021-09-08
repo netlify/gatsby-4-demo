@@ -1,7 +1,7 @@
 // @ts-check
-import { Link } from "gatsby";
-import * as React from "react";
-import { Layout } from "../../layout/default";
+import { Link } from 'gatsby'
+import * as React from 'react'
+import { Layout } from '../../layout/default'
 
 export default function BlogPostTemplate({ serverData }) {
   if (!serverData) {
@@ -9,7 +9,7 @@ export default function BlogPostTemplate({ serverData }) {
       <Layout>
         <p>No serverData. SSR probably isn't enabled.</p>
       </Layout>
-    );
+    )
   }
 
   return (
@@ -33,17 +33,17 @@ export default function BlogPostTemplate({ serverData }) {
         <hr />
       </article>
     </Layout>
-  );
+  )
 }
 
 export async function getServerData({ params }) {
-  const { default: fetch } = require("node-fetch");
+  const { default: fetch } = require('node-fetch')
 
   try {
     const res = await fetch(`https://graphql.us.fauna.com/graphql`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        Authorization: "Bearer " + "fnAEOEwsPmAAQPSMCPst8le3PKMTqM-MT3WAihkC",
+        Authorization: 'Bearer ' + 'fnAEOEwsPmAAQPSMCPst8le3PKMTqM-MT3WAihkC',
       },
       body: JSON.stringify({
         query: `
@@ -57,18 +57,18 @@ query findProduct($slug: String!) {
     `,
         variables: { slug: params.slug },
       }),
-    });
+    })
 
-    const { data, errors } = await res.json();
+    const { data, errors } = await res.json()
     if (errors) {
-      throw new Error("Error loading product");
-      console.log(errors);
+      throw new Error('Error loading product')
+      console.log(errors)
     }
 
     if (data) {
-      return data.findProductBySlug;
+      return { props: data.findProductBySlug }
     }
   } catch (err) {
-    throw new Error(`error: ${err.message}`);
+    throw new Error(`error: ${err.message}`)
   }
 }
