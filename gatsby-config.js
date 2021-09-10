@@ -17,7 +17,7 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-netlify`,
+      resolve: `@ascorbic/gatsby-plugin-netlify`,
     },
   ],
 }

@@ -9,6 +9,18 @@
   dependencies:
     tslib "~2.0.1"
 
+"@ascorbic/gatsby-plugin-netlify@^4.0.0-1":
+  version "4.0.0-1"
+  resolved "https://registry.yarnpkg.com/@ascorbic/gatsby-plugin-netlify/-/gatsby-plugin-netlify-4.0.0-1.tgz#7998ce870f900c7d46b12e4402a103730b81e322"
+  integrity sha512-bz1JbsHbPup/2O6xBWEMvVk7feL2rwrjtQ7o6md7zcnqkkYbk+w2oE2hYCvVFvDUTj3mN/NSfsUgVk6znEE5fg==
+  dependencies:
+    "@babel/runtime" "^7.14.8"
+    fs-extra "^10.0.0"
+    gatsby-core-utils "^3.0.0-alpha-9689ff.24"
+    kebab-hash "^0.1.2"
+    lodash "^4.17.21"
+    webpack-assets-manifest "^5.0.6"
+
 "@babel/code-frame@7.10.4":
   version "7.10.4"
   resolved "https://registry.npmjs.org/@babel/code-frame/-/code-frame-7.10.4.tgz"
@@ -4892,17 +4904,6 @@ gatsby-page-utils@2.0.0-alpha-9689ff.24+7d81b99b95:
     glob "^7.1.7"
     lodash "^4.17.21"
     micromatch "^4.0.4"
-
-"gatsby-plugin-netlify@github:netlify/gatsby-plugin-netlify#feat/v4":
-  version "4.0.0-0"
-  resolved "https://codeload.github.com/netlify/gatsby-plugin-netlify/tar.gz/20c2bc1dbec47ae9c95e26029a1219f8ea7b81e6"
-  dependencies:
-    "@babel/runtime" "^7.14.8"
-    fs-extra "^10.0.0"
-    gatsby-core-utils "^3.0.0-alpha-9689ff.24"
-    kebab-hash "^0.1.2"
-    lodash "^4.17.21"
-    webpack-assets-manifest "^5.0.6"
 
 gatsby-plugin-page-creator@4.0.0-alpha-9689ff.24+7d81b99b95:
   version "4.0.0-alpha-9689ff.24"
