@@ -1,6 +1,6 @@
-import * as React from "react";
-import { Link } from "gatsby";
-import { Layout } from "../../layout/default";
+import * as React from 'react'
+import { Link } from 'gatsby'
+import { Layout } from '../../layout/default'
 import {
   postsListCss,
   postListItemCss,
@@ -8,7 +8,7 @@ import {
   postTeaserTitleCss,
   postTeaserDescriptionCss,
   postTeaserLinkCss,
-} from "../index.module.css";
+} from '../index.module.css'
 
 export default function ProductListing({ serverData }) {
   if (!serverData) {
@@ -16,7 +16,7 @@ export default function ProductListing({ serverData }) {
       <Layout>
         <p>No serverData. SSR probably isn't enabled.</p>
       </Layout>
-    );
+    )
   }
   return (
     <Layout>
@@ -43,21 +43,22 @@ export default function ProductListing({ serverData }) {
                 </p>
               </div>
             </li>
-          );
+          )
         })}
       </ul>
+      <p>{JSON.stringify(serverData?.context)}</p>
     </Layout>
-  );
+  )
 }
 
-export async function getServerData() {
-  const { default: fetch } = require("node-fetch");
+export async function getServerData(context) {
+  const { default: fetch } = require('node-fetch')
 
   try {
     const res = await fetch(`https://graphql.us.fauna.com/graphql`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        Authorization: "Bearer " + "fnAEOEwsPmAAQPSMCPst8le3PKMTqM-MT3WAihkC",
+        Authorization: 'Bearer ' + 'fnAEOEwsPmAAQPSMCPst8le3PKMTqM-MT3WAihkC',
       },
       body: JSON.stringify({
         query: `
@@ -73,24 +74,28 @@ query allProducts {
 
     `,
       }),
-    });
+    })
 
-    const { data, errors } = await res.json();
+    const { data, errors } = await res.json()
     if (errors) {
-      console.log(errors);
+      console.log(errors)
       return {
         products: [],
-      };
+      }
     }
 
     if (data) {
       return {
         props: {
           products: data.allProducts.data,
-        }
-      };
+          context,
+        },
+        headers: {
+          'x-test': 'hi',
+        },
+      }
     }
   } catch (err) {
-    throw new Error(`error: ${err.message}`);
+    throw new Error(`error: ${err.message}`)
   }
 }
