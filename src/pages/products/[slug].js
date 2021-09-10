@@ -11,6 +11,7 @@ export default function BlogPostTemplate({ serverData }) {
       </Layout>
     )
   }
+  const { headers, method, url, query, params } = serverData?.context
 
   return (
     <Layout>
@@ -32,11 +33,20 @@ export default function BlogPostTemplate({ serverData }) {
         />
         <hr />
       </article>
+      <p>
+        {JSON.stringify({
+          headers: Object.fromEntries(headers.entries()),
+          method,
+          url,
+          query,
+          params,
+        })}
+      </p>
     </Layout>
   )
 }
 
-export async function getServerData({ params }) {
+export async function getServerData({ params, ...rest }) {
   const { default: fetch } = require('node-fetch')
 
   try {
@@ -61,12 +71,12 @@ query findProduct($slug: String!) {
 
     const { data, errors } = await res.json()
     if (errors) {
-      throw new Error('Error loading product')
       console.log(errors)
+      throw new Error('Error loading product')
     }
 
     if (data) {
-      return { props: data.findProductBySlug }
+      return { props: data.findProductBySlug, context: { params, ...rest } }
     }
   } catch (err) {
     throw new Error(`error: ${err.message}`)

@@ -18,6 +18,7 @@ export default function ProductListing({ serverData }) {
       </Layout>
     )
   }
+  const { headers, method, url, query, params } = serverData?.context
   return (
     <Layout>
       <ul className={postsListCss}>
@@ -46,7 +47,15 @@ export default function ProductListing({ serverData }) {
           )
         })}
       </ul>
-      <p>{JSON.stringify(serverData?.context)}</p>
+      <p>
+        {JSON.stringify({
+          headers: Object.fromEntries(headers.entries()),
+          method,
+          url,
+          query,
+          params,
+        })}
+      </p>
     </Layout>
   )
 }
