@@ -6,7 +6,7 @@
   "dependencies": {
     "@ascorbic/gatsby-plugin-netlify": "^4.0.0-1",
     "@netlify/functions": "^0.7.2",
-    "@netlify/plugin-gatsby": "^2.0.0-alpha-qe-sm.1",
+    "@netlify/plugin-gatsby": "^2.0.0-alpha-qe-sm.2",
     "@sindresorhus/slugify": "^1.0.0",
     "etag": "^1.8.1",
     "fs-extra": "^10.0.0",

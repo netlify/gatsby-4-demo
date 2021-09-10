@@ -1356,7 +1356,7 @@
   dependencies:
     is-promise "^4.0.0"
 
-"@netlify/plugin-gatsby@^2.0.0-alpha-qe-sm.1":
+"@netlify/plugin-gatsby@^2.0.0-alpha-qe-sm.2":
   version "2.0.0-alpha-qe-sm.2"
   resolved "https://registry.yarnpkg.com/@netlify/plugin-gatsby/-/plugin-gatsby-2.0.0-alpha-qe-sm.2.tgz#3afda25cbfa5199e2f415ba6b14dbfbf9469ead9"
   integrity sha512-FTJCNzaYaO1+jJLSC3la65hXnG8QjehUPcEU5TTpu7hDq0pdzktK1G5Q5rRD67VK3SEEG03wcacV3iAG7omOyQ==
