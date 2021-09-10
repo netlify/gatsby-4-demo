@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@ascorbic/gatsby-plugin-netlify": "^4.0.0-1",
+    "@ascorbic/gatsby-plugin-netlify": "^4.0.0-2",
     "@netlify/functions": "^0.7.2",
     "@netlify/plugin-gatsby": "^2.0.0-alpha-qe-sm.2",
     "@sindresorhus/slugify": "^1.0.0",
