@@ -18,7 +18,7 @@ export default function ProductListing({ serverData }) {
       </Layout>
     )
   }
-  const { headers, method, url, query, params } = serverData?.context
+  console.log({ serverData })
   return (
     <Layout>
       <ul className={postsListCss}>
@@ -47,22 +47,13 @@ export default function ProductListing({ serverData }) {
           )
         })}
       </ul>
-      <p>
-        {JSON.stringify({
-          headers: Object.fromEntries(headers.entries()),
-          method,
-          url,
-          query,
-          params,
-        })}
-      </p>
+      <p>{JSON.stringify(serverData?.context)}</p>
     </Layout>
   )
 }
 
 export async function getServerData(context) {
   const { default: fetch } = require('node-fetch')
-
   try {
     const res = await fetch(`https://graphql.us.fauna.com/graphql`, {
       method: 'POST',
@@ -92,12 +83,18 @@ query allProducts {
         products: [],
       }
     }
-
+    const { headers, method, url, params, query } = context
     if (data) {
       return {
         props: {
           products: data.allProducts.data,
-          context,
+          context: {
+            headers: headers && Object.fromEntries(headers.entries()),
+            method,
+            url,
+            query,
+            params,
+          },
         },
         headers: {
           'x-test': 'hi',

@@ -35,7 +35,7 @@ export default function BlogPostTemplate({ serverData }) {
       </article>
       <p>
         {JSON.stringify({
-          headers: Object.fromEntries(headers.entries()),
+          headers,
           method,
           url,
           query,
@@ -46,7 +46,7 @@ export default function BlogPostTemplate({ serverData }) {
   )
 }
 
-export async function getServerData({ params, ...rest }) {
+export async function getServerData({ params, headers, ...rest }) {
   const { default: fetch } = require('node-fetch')
 
   try {
@@ -76,7 +76,16 @@ query findProduct($slug: String!) {
     }
 
     if (data) {
-      return { props: data.findProductBySlug, context: { params, ...rest } }
+      return {
+        props: {
+          context: {
+            params,
+            headers: Object.fromEntries(headers.entries()),
+            ...rest,
+          },
+          ...data.findProductBySlug,
+        },
+      }
     }
   } catch (err) {
     throw new Error(`error: ${err.message}`)
