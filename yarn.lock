@@ -1344,10 +1344,10 @@
   dependencies:
     is-promise "^4.0.0"
 
-"@netlify/plugin-gatsby@^2.0.0-alpha-qe-sm.2":
-  version "2.0.0-alpha-qe-sm.2"
-  resolved "https://registry.npmjs.org/@netlify/plugin-gatsby/-/plugin-gatsby-2.0.0-alpha-qe-sm.2.tgz"
-  integrity sha512-FTJCNzaYaO1+jJLSC3la65hXnG8QjehUPcEU5TTpu7hDq0pdzktK1G5Q5rRD67VK3SEEG03wcacV3iAG7omOyQ==
+"@netlify/plugin-gatsby@^2.0.0-beta.0":
+  version "2.0.0-beta.0"
+  resolved "https://registry.npmjs.org/@netlify/plugin-gatsby/-/plugin-gatsby-2.0.0-beta.0.tgz"
+  integrity sha512-h7mBdrRbADs4366o8yRdU9iY1YuJgaid8Yoah2IBeltgKPvhnRqOPR1yL+LEUaPHbnjOxlt1+YHMreqSrJYcQA==
   dependencies:
     "@netlify/functions" "^0.7.2"
     co-body "^6.1.0"
