@@ -51,8 +51,8 @@ export default function Home({ data }) {
         <li className={postListItemCss}>
           <div className={postTeaserCss}>
             <h2 className={postTeaserTitleCss}>
-              <Link to={`/products/`} className={postTeaserLinkCss}>
-                Products (SSR)
+              <Link to={`/dogs/`} className={postTeaserLinkCss}>
+                Dogs (SSR)
               </Link>
             </h2>
           </div>
