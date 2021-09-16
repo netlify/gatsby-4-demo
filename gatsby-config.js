@@ -16,6 +16,6 @@ module.exports = {
         plugins: [],
       },
     },
-    `gatsby-plugin-netlify`,
+    require.resolve(`../../gatsby-plugin-netlify/`),
   ],
 }
