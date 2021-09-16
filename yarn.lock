@@ -1344,10 +1344,10 @@
   dependencies:
     is-promise "^4.0.0"
 
-"@netlify/plugin-gatsby@^2.0.0-beta.1":
-  version "2.0.0-beta.1"
-  resolved "https://registry.npmjs.org/@netlify/plugin-gatsby/-/plugin-gatsby-2.0.0-beta.1.tgz"
-  integrity sha512-aSgrB2EOzvXBDOL2S1Usg2tn+nKzX4YHJpU9//vXl+o5VkBUh6OoJqzw3T5j/mM/yc17lnX2PgvhXBt0izhmJw==
+"@netlify/plugin-gatsby@^2.0.0-beta.2":
+  version "2.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@netlify/plugin-gatsby/-/plugin-gatsby-2.0.0-beta.2.tgz#fbf7fb0fd124407eb1f416c28ecddc691ea7a736"
+  integrity sha512-JHkcWu5HVVfBP1FjLFRrD9e1bMPr3mc3ZUYFrXGOONYa1SVLTfMURDWtGQFiC1PCh5MrNZ+Ag7wwRdTj/mW/QQ==
   dependencies:
     "@netlify/functions" "^0.7.2"
     co-body "^6.1.0"
@@ -6718,7 +6718,7 @@ linkfs@^2.1.0:
   resolved "https://registry.npmjs.org/linkfs/-/linkfs-2.1.0.tgz"
   integrity sha512-kmsGcmpvjStZ0ATjuHycBujtNnXiZR28BTivEu0gAMDTT7GEyodcK6zSRtu6xsrdorrPZEIN380x7BD7xEYkew==
 
-lmdb-store@1.6.8, lmdb-store@^1.6.6:
+lmdb-store@^1.6.6:
   version "1.6.8"
   resolved "https://registry.yarnpkg.com/lmdb-store/-/lmdb-store-1.6.8.tgz#f57c1fa4a8e8e7a73d58523d2bfbcee96782311f"
   integrity sha512-Ltok13VVAfgO5Fdj/jVzXjPJZjefl1iENEHerZyAfAlzFUhvOrA73UdKItqmEPC338U29mm56ZBQr5NJQiKXow==
