@@ -1344,10 +1344,10 @@
   dependencies:
     is-promise "^4.0.0"
 
-"@netlify/plugin-gatsby@^2.0.0-beta.2":
-  version "2.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@netlify/plugin-gatsby/-/plugin-gatsby-2.0.0-beta.2.tgz#fbf7fb0fd124407eb1f416c28ecddc691ea7a736"
-  integrity sha512-JHkcWu5HVVfBP1FjLFRrD9e1bMPr3mc3ZUYFrXGOONYa1SVLTfMURDWtGQFiC1PCh5MrNZ+Ag7wwRdTj/mW/QQ==
+"@netlify/plugin-gatsby@^2.0.0-beta.3":
+  version "2.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/@netlify/plugin-gatsby/-/plugin-gatsby-2.0.0-beta.3.tgz#0e00318ef702f1eb775ceed7a22e16fd6dc16aef"
+  integrity sha512-IQjdJEYUdmbzzj+rYH3solKJy4yd05nLMvuGq8M9hczZCxuxNxUd+3UapyWvVsztYg1EgEzUFN7TXoTazvKJww==
   dependencies:
     "@netlify/functions" "^0.7.2"
     co-body "^6.1.0"
