@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "description": "A demo of using Gatsby 4 on Netlify",
+  "repository": "git@github.com:netlify/gatsby-4-demo.git",
+  "author": "Matt Kane <m@mk.gg>",
+  "private": true,
   "dependencies": {
     "@netlify/functions": "^0.7.2",
     "@netlify/plugin-gatsby": "^2.0.0-beta.3",
