@@ -65,6 +65,7 @@ export default function Home({ data }) {
                 GraphiQL
               </a>
             </h2>
+            <p>Not enabled by default: see `examples` for how to enable it.</p>
           </div>
         </li>
       </ul>

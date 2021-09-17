@@ -2,9 +2,6 @@
 command = "yarn build"
 publish = "public"
 
-[functions]
-directory = "netlify/functions"
-
 [functions.graphql]
 included_files = [
     ".cache/data/**",
@@ -13,7 +10,6 @@ included_files = [
     "node_modules/gatsby-graphiql-explorer/app.js",
 ]
 external_node_modules = ["msgpackr-extract"]
-node_bundler = "esbuild"
 
 [[redirects]]
 from = "/___graphql*"
@@ -24,10 +20,6 @@ status = 200
 from = "/___graphiql*"
 to = "/.netlify/functions/graphql"
 status = 200
-
-[dev]
-# So it doesn't run gatsby develop
-framework = "#static"
 
 [[plugins]]
 package = "@netlify/plugin-gatsby"
