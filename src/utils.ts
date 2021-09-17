@@ -1,3 +1,8 @@
+/**
+ * Utility functions for dealing with Gatsby query engines. These are the same as the ones used
+ * in the Netlify Essential Gatsby plugin
+ */
+
 import fs from 'fs'
 import os from 'os'
 import { join } from 'path'
@@ -45,8 +50,9 @@ export function prepareFilesystem(): void {
   // eslint-disable-next-line no-underscore-dangle
   global._fsWrapper = lfs
   const dir = 'data'
+  // Lambdas preserve /tmp, so we won't copy the files across if they already exist
   if (!process.env.NETLIFY_LOCAL && existsSync(join(TEMP_CACHE_DIR, dir))) {
-    console.log('directory already exists')
+    console.log('Directory already exists')
     return
   }
   console.log(`Start copying ${dir}`)

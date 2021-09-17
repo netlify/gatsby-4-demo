@@ -36,7 +36,7 @@ exports.createSchemaCustomization = function createSchemaCustomization({
 }
 
 /**
- * Example of DPR using createPages
+ * Create DSG pages
  */
 exports.createPages = async function createPages({
   graphql,
@@ -61,17 +61,16 @@ exports.createPages = async function createPages({
   }
 
   for (const node of data.allMarkdownRemark.nodes) {
-    console.log('nodeid', node.id)
     actions.createPage({
-      path: `/dsr-blog/${node.slug}/`,
+      path: `/blog/${node.slug}/`,
       component: path.resolve(`./src/template/post.js`),
       ownerNodeId: node.id,
       context: {
         id: node.id,
         slug: node.slug,
       },
-      defer: true,
-      // defer: node.slug !== "hello-world",
+      // You can use any condition here, e.g. only defer older posts
+      defer: node.slug !== 'hello-world',
     })
   }
 }

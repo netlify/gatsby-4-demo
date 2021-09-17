@@ -19,21 +19,12 @@ export default function Home({ data }) {
             <li className={postListItemCss}>
               <div className={postTeaserCss}>
                 <h2 className={postTeaserTitleCss}>
-                  {node.frontmatter.title} (
                   <Link
                     to={`/blog/${node.slug}/`}
                     className={postTeaserLinkCss}
                   >
-                    SSG
+                    {node.frontmatter.title} ( DSG )
                   </Link>
-                  ) (
-                  <Link
-                    to={`/dsr-blog/${node.slug}/`}
-                    className={postTeaserLinkCss}
-                  >
-                    DSR
-                  </Link>
-                  )
                 </h2>
                 <p className={postTeaserDescriptionCss}>
                   <Link

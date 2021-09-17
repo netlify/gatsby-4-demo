@@ -1,5 +1,5 @@
 {
-  "name": "gatsby-dsr-demo",
+  "name": "gatsby-4-demo",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -9,24 +9,21 @@
     "@sindresorhus/slugify": "^1.0.0",
     "etag": "^1.8.1",
     "fs-extra": "^10.0.0",
-    "gatsby": "^4.0.0-next.0",
+    "gatsby": "^4.0.0-zz-next.1",
     "gatsby-plugin-netlify": "^4.0.0-next.0",
-    "gatsby-source-filesystem": "^4.0.0-next.0",
-    "gatsby-transformer-remark": "^5.0.0-next.0",
+    "gatsby-source-filesystem": "^4.0.0-zz-next.1",
+    "gatsby-transformer-remark": "^5.0.0-zz-next.1",
     "linkfs": "^2.1.0",
     "node-fetch": "^2.6.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
   "scripts": {
-    "build": "gatsby -v && gatsby build && ls -l public .cache",
+    "build": "gatsby build",
     "develop": "gatsby develop",
-    "start": "npm run build && npm run serve",
     "serve": "gatsby serve"
   },
   "devDependencies": {
-    "@types/fs-extra": "^9.0.12",
-    "co-body": "^6.1.0",
-    "multer": "^1.4.3"
+    "@types/fs-extra": "^9.0.12"
   }
 }
