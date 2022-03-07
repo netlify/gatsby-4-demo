@@ -1337,6 +1337,13 @@
   resolved "https://registry.yarnpkg.com/@microsoft/fetch-event-source/-/fetch-event-source-2.0.1.tgz#9ceecc94b49fbaa15666e38ae8587f64acce007d"
   integrity sha512-W6CLUJ2eBMw3Rec70qrsEW0jOm/3twwJv21mrmj2yORiaVmVYGS4sSS5yUwvQc1ZlDLYGPnClVWmUUMagKNsfA==
 
+"@netlify/functions@^0.11.1":
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/@netlify/functions/-/functions-0.11.1.tgz#52ce421cc6ecb7a35513fbe76ad4a65c94b0bef0"
+  integrity sha512-J2QUAYRblvTrl/cOYU2RNHdv/EYy4qnKQhds0aDNB560Y83wfpaMS3F7PKpHygGWrVuLRyevenIzsV9MaQrKlQ==
+  dependencies:
+    is-promise "^4.0.0"
+
 "@netlify/functions@^0.7.2":
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/@netlify/functions/-/functions-0.7.2.tgz#9d39553b94e7aaa86dddf515bdbaed3e89998122"
