@@ -1,11 +1,11 @@
-import * as React from "react";
-import { graphql, Link } from "gatsby";
-import { Layout } from "../layout/default";
-import { containerCss } from "./post.module.css";
+import * as React from 'react'
+import { graphql, Link } from 'gatsby'
+import { Layout } from '../layout/default'
+import { containerCss } from './post.module.css'
 
 export default function BlogPostTemplate({ data, pageContext }) {
-  console.log(JSON.stringify(data, null, 2));
-  const post = data.markdownRemark;
+  console.log(JSON.stringify(data, null, 2))
+  const post = data.markdownRemark
 
   return (
     <Layout>
@@ -27,20 +27,24 @@ export default function BlogPostTemplate({ data, pageContext }) {
         <hr />
       </article>
     </Layout>
-  );
+  )
 }
 
 /**
- * Example of DSR per path using fs Routes
+ * Example of DSG per path using fs Routes
  */
-export function config({ params }) {
-  return {
-    defer: params.slug !== "hello-world",
-  };
+
+export async function config() {
+  // Optionally use GraphQL here
+  return ({ params }) => {
+    return {
+      defer: params.slug !== 'hello-world',
+    }
+  }
 }
 
 /**
- * Example of DSR for all routes
+ * Example of DSG for all routes
  */
 // export const config = {
 //   defer: true,
@@ -64,4 +68,4 @@ export const query = graphql`
       # slug
     }
   }
-`;
+`
