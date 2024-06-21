@@ -8,7 +8,7 @@
   "author": "Matt Kane <m@mk.gg>",
   "private": true,
   "dependencies": {
-    "@netlify/functions": "^0.11.1",
+    "@netlify/functions": "^2.8.0",
     "@netlify/plugin-gatsby": "^2.1.4",
     "@sindresorhus/slugify": "^1.0.0",
     "etag": "^1.8.1",
